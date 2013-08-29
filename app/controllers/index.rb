@@ -1,7 +1,7 @@
 # GET ############################
 
 get '/' do
-  @posts = Post.all
+  @posts = Post.order('created_at DESC')
   erb :index
 end
 

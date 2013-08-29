@@ -1,0 +1,7 @@
+<h3>Current Tags</h3>
+
+<% @tags.each do |tag| %>
+  <ul>
+    <li><a href="/tags/<%=tag.name%>"><%=tag.name%></a></li>
+  </ul>
+<%end%>
