@@ -1,0 +1,11 @@
+<h3>Edit your post</h3>
+
+<form action="/posts/<%= @post.id %>" method="POST">
+  <%= erb :_post_form %>
+  <input type="submit" value="update">
+</form>
+
+<form action="/posts/<%= @post.id %>/delete" method="POST">
+  <input type="submit" value="Delete Post">
+</form>
+
