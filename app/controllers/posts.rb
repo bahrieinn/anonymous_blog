@@ -1,13 +1,16 @@
 # GET ############################
 
-# When you try /posts, display index page
-get '/posts' do 
+# When you try '/posts', display index page
+get '/posts' do
+  @title = "Home"
+  @posts = Post.order('created_at DESC') 
   erb :index
 end
 
 
 #GET a new post form
 get '/posts/new' do
+  @title = "New Post"
   erb :new
 end
 
@@ -15,8 +18,9 @@ end
 get '/posts/:id' do
   @post = Post.find_all_by_id(params[:id])
   if @post.empty?
-    redirect "/" #come back later to add 'cant find specified blog'
+    erb :error_no_post
   else
+    @title = @post.first.title
     erb :show 
   end
 end
@@ -24,6 +28,7 @@ end
 
 #GET an existing post in edit form
 get '/posts/:id/edit' do
+  @title = "Edit"
   @post = Post.find(params[:id])
   if @post
     erb :edit
@@ -35,7 +40,7 @@ end
 
 # POST #############################
 
-#POST to here when creating NEW post
+#CREATING new post
 post '/posts' do
   @post = Post.new(params[:post])
   tags = params[:tags].split(',').collect(&:strip)
@@ -49,7 +54,7 @@ post '/posts' do
 end
 
 
-#POST here for UPDATING an existing post
+#UPDATING an existing post
 post '/posts/:id' do
   #update post data
   @post = Post.find(params[:id])
@@ -57,6 +62,7 @@ post '/posts/:id' do
   
   #update tag data
   tags = params[:tags].split(',').collect(&:strip)
+  @post.tags.clear
   @post.add_tags(tags)
 
   redirect "/posts/#{@post.id}"

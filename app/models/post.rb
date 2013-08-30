@@ -7,10 +7,15 @@ class Post < ActiveRecord::Base
 
   def add_tags(tag_array) #takes array of tags e.g. ["tag1", "tag2", etc.]
     tag_array.each do |input_tag|
-      unless self.tags.any? { |tag| tag.name == input_tag }
-        self.tags.push(Tag.find_or_create_by_name(name: input_tag))
+      unless self.tags.any? { |tag| tag.name == input_tag.downcase }
+        self.tags.push(Tag.find_or_create_by_name(name: input_tag.downcase ))
       end
     end
+  end
+
+  def fix_datetime
+    ar_time = self.created_at.to_s
+    DateTime.parse(ar_time).strftime("%a, %b %e at %l:%M %p")
   end
 
 end

@@ -1,18 +1,5 @@
 <h3>All blog posts here</h3>
-<a href="/posts/new">Compose a Post</a>
 
-<% if @posts %>
-  <% @posts.each do |post| %>
-    <h3><%= post.title %></h3><br>
-    <p><%= post.author %></p><br>
-    <p><%= post.body %></p><br>
-    <ul>
-      <% if post.tags %>
-        <% post.tags.each do |tag| %>
-          <li><%= tag.name %></li>
-        <% end %>
-      <% end %>
-    </ul>
-  <% end %>
-<% end %>
+
+<%= erb :_post_list %>
 

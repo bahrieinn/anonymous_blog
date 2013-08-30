@@ -15,9 +15,15 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
 
-  <title></title>
+  <title>DBC Blog | <%= @title %> </title>
 </head>
 <body>
+  <header>
+    <a href="/">Home</a>
+    <a href="/posts/new">Compose a Post</a>
+    <a href="/tags">View Tags</a>
+  </header>
+  
   <div class="container">
     <%= yield %>
   </div>
