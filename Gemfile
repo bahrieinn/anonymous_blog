@@ -21,3 +21,6 @@ group :test do
   gem 'faker'
   gem 'rspec'
 end
+
+# Pagination 
+gem "will_paginate", "~> 3.0.4"
