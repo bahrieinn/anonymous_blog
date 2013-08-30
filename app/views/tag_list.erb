@@ -1,7 +1,8 @@
-<h3>Tags | all </h3>
-
-<% @tags.each do |tag| %>
-  <ul>
-    <li><a href="/tags/<%=tag.name%>"><%=tag.name%></a></li>
-  </ul>
-<%end%>
+<h3 class="tags_all">Tags | all </h3>
+<div class="full_tags">
+  <% @tags.each do |tag| %>
+    <ul class="tag_list">
+      <li><a href="/tags/<%=tag.name%>"><%=tag.name%></a></li>
+    </ul>
+  <%end%>
+</div>

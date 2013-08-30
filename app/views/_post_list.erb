@@ -1,14 +1,20 @@
+
 <% if @posts %>
   <% @posts.each do |post| %>
-    <h3><a href="/posts/<%=post.id%>"><%= post.title %></a></h3><p><%= post.fix_datetime %></p><br>
-    <p><%= post.author %></p><br>
-    <p><%= post.body %></p><br>
-    <ul>
-      <% if post.tags %>
-        <% post.tags.each do |tag| %>
-          <li><a href="/tags/<%= tag.name %>"><%= tag.name %></a></li>
+    <div class="posts">
+      <h3 class="post_title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h3>
+      <p><%= post.author %></p>
+      <p class="post_body"><%= post.body %></p>
+      <!-- <p class="tag_label">Tags :</p> -->
+      <ul class="tag_list">
+        <% if post.tags %>
+          <% post.tags.each do |tag| %>
+            <li><a href="/tags/<%= tag.name %>"><%= tag.name %></a></li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+      <p class="datetime"><%= post.fix_datetime %></p>
+    </div>
   <% end %>
 <% end %>
+

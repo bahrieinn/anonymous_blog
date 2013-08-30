@@ -1,16 +1,22 @@
 <% @post = @post.first %>
-<h3><%= @post.title %></h3><br>
-<p><%= @post.author %></p><br>
-<p><%= @post.body %></p><br>
+<div class="single_post">
+  <h3 class="post_title"><%= @post.title %></h3>
+  <p><%= @post.author %></p>
+  <p class="post_body"><%= @post.body %></p>
 
-<ul>
-  <% if @post.tags %>
-    <% @post.tags.each do |tag| %>
-      <li><%= tag.name %></li>
+  <ul class="tag_list">
+    <% if @post.tags %>
+      <% @post.tags.each do |tag| %>
+        <li><a href="/tags/<%= tag.name %>"><%= tag.name %></a></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
+  <p class="datetime"><%= @post.fix_datetime %></p>
+</div>
 
 <form action="/posts/<%=@post.id%>/edit">
-  <input type="submit" value="Edit Post">
+  <input class="edit_button" type="submit" value="Edit Post">
 </form>
+
+
+
