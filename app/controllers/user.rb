@@ -1,15 +1,11 @@
 # GET ############################
 
-get '/' do
-  @title = "Login"          
-  erb :index, :layout => false
+get '/users/login' do |variable|
+  
 end
 
 
 
 
-
-
 # POST #############################
-
 

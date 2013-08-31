@@ -4,7 +4,7 @@
 get '/posts' do
   @title = "Home"
   @posts = Post.order('created_at DESC') 
-  erb :index
+  erb :home
 end
 
 

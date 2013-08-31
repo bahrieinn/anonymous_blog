@@ -1,5 +1,22 @@
-<h3>Blog | all posts</h3>
+<title>Bob Loblaw's Law Blog | <%= @title %> </title>
+
+<form action="/users/login" method="GET">
+  <h3>Login Here</h3>
+  <label for="email">Email</label>
+  <input type="email" name="user[email]" id="email" placeholder="john@smith.com">
+  <label for="password">Password</label>
+  <input type="password" name="user[password]" id="password">
+  <input type="submit" value="Login!">
+</form>
+
+<form action="/users/new" method="POST">
+  <h3>New Users Sign Up Here</h3>
+  <label for="email">Email</label>
+  <input type="email" name="user[email]" id="email" placeholder="john@smith.com">
+  <label for="password">Password</label>
+  <input type="password" name="user[password]" id="password">
+  <input type="submit" value="Sign Up!">
+</form>
 
 
-<%= erb :_post_list %>
 
