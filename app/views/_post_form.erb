@@ -6,9 +6,8 @@
   <input id="post_author" type="text" name="post[author]" placeholder="Your name(optional)" value="<%=@post.try(:author)%>"><br>
 
   <label for="post_body">Body</label>
-  <input id="post_body" type="textarea" name="post[body]" placeholder="Start typing your post here" value="<%=@post.try(:body)%>"><br>
+  <textarea id="post_body" type="textarea" name="post[body]" placeholder="Start typing your post here" value="<%=@post.try(:body)%>"></textarea><br>
 
   <label for="tags">Add Tags</label>
   <input id="tags" type="text" name="tags" placeholder="tag1, tag2, tag3, etc." value="<%=@post.try(:list_tags)%>">
 </div>
-

@@ -139,7 +139,7 @@ th {
   text-align:right;
   padding-right:5px;
 }
-.form input {
+.form input, textarea {
   display:inline-block;
   float:left;
   margin-bottom:5px;
