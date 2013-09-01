@@ -63,8 +63,14 @@ end
 #CREATING new post
 post '/posts' do
   if current_user
-    @post = current_user.posts.new(params[:post])
     tags = params[:tags].split(',').collect(&:strip)
+
+    if params[:anonymous]
+      tags.unshift('anonymous')
+      @post = Post.new(params[:post])
+    else
+      @post = current_user.posts.new(params[:post])
+    end
 
     if @post.save
       @post.add_tags(tags)
@@ -72,6 +78,7 @@ post '/posts' do
     else
       erb :new
     end
+
   else
     redirect "/"
   end
