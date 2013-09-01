@@ -2,8 +2,8 @@
   <label for="post_title">Title</label>
   <input id="post_title" type="text" name="post[title]" placeholder="Enter Title" value="<%=@post.try(:title)%>"><br> 
 
-  <label for="post_author">Author</label>
-  <input id="post_author" type="text" name="post[author]" placeholder="Your name(optional)" value="<%=@post.try(:author)%>"><br>
+  <!-- <label for="post_author">Author</label>
+  <input id="post_author" type="text" name="post[author]" placeholder="Your name(optional)" value="<%=@post.try(:author)%>"><br> -->
 
   <label for="post_body">Body</label>
   <textarea id="post_body" type="textarea" name="post[body]" placeholder="Start typing your post here" value="<%=@post.try(:body)%>"></textarea><br>

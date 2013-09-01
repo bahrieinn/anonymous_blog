@@ -70,6 +70,7 @@ post '/posts' do
       @post = Post.new(params[:post])
     else
       @post = current_user.posts.new(params[:post])
+      @post.author = current_user.username
     end
 
     if @post.save

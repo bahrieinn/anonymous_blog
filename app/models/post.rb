@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   has_and_belongs_to_many :tags
-  before_create :default_author
+  # before_create :default_author
 
   def list_tags
     self.tags.map { |tag| tag.name }.join(", ")
@@ -19,11 +19,14 @@ class Post < ActiveRecord::Base
     DateTime.parse(ar_time).strftime("%a, %b %e at %l:%M %p")
   end
   
-private
+  # def set_author(anonymity)
+  #   unless anonymity
+  #     self.author = current_user.username
+  #   end
+  # end
 
-  def default_author
-    self.author ||= 'anonymous'
-  end
+  #if user selects anonymous, then post.author should be blacnk
+  #else, post.author should be user.username
 
 end
 
