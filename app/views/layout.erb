@@ -21,7 +21,7 @@
   <header>
     <h2>Bob Loblaw's Law Blog</h2>
     <div class="nav_links">
-      <a href="/">Home</a>
+      <a href="/posts">Home</a>
       <a href="/posts/new">Compose Post</a>
       <a href="/tags">View Tags</a>
     </div>
@@ -30,5 +30,10 @@
   <div class="container">
     <%= yield %>
   </div>
+  <footer>
+    <form action="/users/logout">
+      <input type="submit" method="GET" value="Logout">
+    </form>
+  </footer>
 </body>
 </html>

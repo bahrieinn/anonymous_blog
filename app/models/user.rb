@@ -1,7 +1,12 @@
 class User < ActiveRecord::Base
   has_many :posts
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
   before_create :encrypt_pw 
+
+  def authenticate(pw_attempt)
+    self.password == pw_attempt.crypt(self.salt)  
+  end
 
   private
   
@@ -12,7 +17,7 @@ class User < ActiveRecord::Base
 
   def encrypt_pw
     gen_salt
-    encrypted_pw = self.pw_hash.crypt(self.salt)
-    self.assign_attributes(pw_hash: encrypted_pw)
+    encrypted_pw = self.password.crypt(self.salt)
+    self.assign_attributes(password: encrypted_pw)
   end
 end

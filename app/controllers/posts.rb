@@ -1,39 +1,59 @@
 # GET ############################
+enable :sessions
+
 
 # When you try '/posts', display index page
 get '/posts' do
-  @title = "Home"
-  @posts = Post.order('created_at DESC') 
-  erb :home
+  if current_user 
+    @user = User.find(session[:user_id])
+    # @user = User.find(session[:user_id])
+    @title = "Home"
+    @posts = Post.order('created_at DESC') 
+    erb :home
+  else
+    redirect "/"
+  end
 end
 
 
 #GET a new post form
 get '/posts/new' do
-  @title = "New Post"
-  erb :new
+  if current_user
+    @title = "New Post"
+    erb :new
+  else
+    redirect "/"
+  end
 end
 
 #GET a specific post
 get '/posts/:id' do
-  @post = Post.find_all_by_id(params[:id])
-  if @post.empty?
-    erb :error_no_post
-  else
+  if current_user
+    @post = Post.find_all_by_id(params[:id])
+    if @post.empty?
+      erb :error_no_post
+    else
     @title = @post.first.title
     erb :show 
+    end
+  else
+    redirect "/"
   end
 end
 
 
 #GET an existing post in edit form
 get '/posts/:id/edit' do
-  @title = "Edit"
-  @post = Post.find(params[:id])
-  if @post
-    erb :edit
-  else
-    redirect "/" #come back later to add 'cant find specified blog'
+  if current_user
+    @title = "Edit"
+    @post = Post.find(params[:id])
+    if @post
+      erb :edit
+    else
+      redirect "/posts" #come back later to add 'cant find specified blog'
+    end
+  else 
+    redirect "/"
   end
 end
 
@@ -42,36 +62,48 @@ end
 
 #CREATING new post
 post '/posts' do
-  @post = Post.new(params[:post])
-  tags = params[:tags].split(',').collect(&:strip)
+  if current_user
+    @post = current_user.posts.new(params[:post])
+    tags = params[:tags].split(',').collect(&:strip)
 
-  if @post.save
-    @post.add_tags(tags)
-    redirect "/"
+    if @post.save
+      @post.add_tags(tags)
+      redirect "/posts"
+    else
+      erb :new
+    end
   else
-    erb :new
+    redirect "/"
   end
 end
 
 
 #UPDATING an existing post
 post '/posts/:id' do
-  #update post data
-  @post = Post.find(params[:id])
-  @post.update_attributes(params[:post])
-  
-  #update tag data
-  tags = params[:tags].split(',').collect(&:strip)
-  @post.tags.clear
-  @post.add_tags(tags)
+  if current_user
+    #update post data
+    @post = Post.find(params[:id])
+    @post.update_attributes(params[:post])
+    
+    #update tag data
+    tags = params[:tags].split(',').collect(&:strip)
+    @post.tags.clear
+    @post.add_tags(tags)
 
-  redirect "/posts/#{@post.id}"
+    redirect "/posts/#{@post.id}"
+  else 
+    redirect "/"
+  end
 end
 
 post '/posts/:id/delete' do
-  @post = Post.find(params[:id])
-  @post.destroy
-  redirect "/"
+  if current_user
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect "/posts"
+  else
+    redirect "/"
+  end
 end
 
 

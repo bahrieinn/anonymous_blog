@@ -9,5 +9,7 @@
   <textarea id="post_body" type="textarea" name="post[body]" placeholder="Start typing your post here" value="<%=@post.try(:body)%>"></textarea><br>
 
   <label for="tags">Add Tags</label>
-  <input id="tags" type="text" name="tags" placeholder="tag1, tag2, tag3, etc." value="<%=@post.try(:list_tags)%>">
+  <input id="tags" type="text" name="tags" placeholder="tag1, tag2, tag3, etc." value="<%=@post.try(:list_tags)%>"><br>
+  <label for="anonymous">Post anonymously</label>
+  <input id="anonymous" type="checkbox" name="post[anonymous]" value="anonymous">
 </div>

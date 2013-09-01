@@ -1,22 +1,45 @@
-<title>Bob Loblaw's Law Blog | <%= @title %> </title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      normalize.css removes cross-browser differences in defaults, e.g.,
+      differences in how form elements appear between Firefox and IE
+      See: http://necolas.github.com/normalize.css/
+    -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <!--
+      application.css is where you put your styles
+    -->
+    <link rel="stylesheet" href="/css/application.css">
 
-<form action="/users/login" method="GET">
-  <h3>Login Here</h3>
-  <label for="email">Email</label>
-  <input type="email" name="user[email]" id="email" placeholder="john@smith.com">
-  <label for="password">Password</label>
-  <input type="password" name="user[password]" id="password">
-  <input type="submit" value="Login!">
-</form>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/js/application.js"></script>
 
-<form action="/users/new" method="POST">
-  <h3>New Users Sign Up Here</h3>
-  <label for="email">Email</label>
-  <input type="email" name="user[email]" id="email" placeholder="john@smith.com">
-  <label for="password">Password</label>
-  <input type="password" name="user[password]" id="password">
-  <input type="submit" value="Sign Up!">
-</form>
+    <title>Bob Loblaw's Law Blog | <%= @title %> </title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/users/login" method="GET">
+        <h3>Login Here</h3>
+        <label for="email">Email</label>
+        <input type="email" name="user[email]" id="email" placeholder="john@smith.com">
+        <label for="password">Password</label>
+        <input type="password" name="user[password]" id="password">
+        <input type="submit" value="Login!">
+      </form>
+
+      <form action="/users/new" method="POST">
+        <h3>New Users Sign Up Here</h3>
+        <label for="email">Email</label>
+        <input type="email" name="user[email]" id="email" placeholder="john@smith.com">
+        <label for="password">Password</label>
+        <input type="password" name="user[password]" id="password">
+        <input type="submit" value="Sign Up!">
+      </form>
+    </div>
+  </body>
+</html>
+
 
 
 

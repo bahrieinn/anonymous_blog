@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   has_and_belongs_to_many :tags
+  before_create :default_author
 
   def list_tags
     self.tags.map { |tag| tag.name }.join(", ")
@@ -16,6 +17,12 @@ class Post < ActiveRecord::Base
   def fix_datetime
     ar_time = self.created_at.to_s
     DateTime.parse(ar_time).strftime("%a, %b %e at %l:%M %p")
+  end
+  
+private
+
+  def default_author
+    self.author ||= 'anonymous'
   end
 
 end
