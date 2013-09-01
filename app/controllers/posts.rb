@@ -26,15 +26,24 @@ get '/posts/new' do
   end
 end
 
+get '/posts/user/:username' do
+  if current_user
+    @posts = Post.where(author: params[:username])
+    erb :_post_list
+  else
+    redirect "/"
+  end
+end
+
 #GET a specific post
 get '/posts/:id' do
   if current_user
-    @post = Post.find_all_by_id(params[:id])
-    if @post.empty?
+    @post = Post.find_by_id(params[:id])
+    if @post.nil?
       erb :error_no_post
     else
-    @title = @post.first.title
-    erb :show 
+      @title = @post.title
+      erb :show 
     end
   else
     redirect "/"
@@ -45,12 +54,16 @@ end
 #GET an existing post in edit form
 get '/posts/:id/edit' do
   if current_user
-    @title = "Edit"
-    @post = Post.find(params[:id])
-    if @post
-      erb :edit
+    @post = Post.find_by_id(params[:id])
+    if @post.nil?
+      erb :error_no_post
     else
-      redirect "/posts" #come back later to add 'cant find specified blog'
+      if current_user.id == @post.user_id
+        @title = "Edit"
+        erb :edit
+      else
+        redirect "/posts/#{params[:id]}"
+      end
     end
   else 
     redirect "/"

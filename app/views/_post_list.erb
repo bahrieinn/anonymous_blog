@@ -3,7 +3,7 @@
   <% @posts.each do |post| %>
     <div class="posts">
       <h3 class="post_title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h3>
-      <p><%= post.author %></p>
+      <a href="/posts/user/<%= post.author %>"><%= post.author %></a>
       <p class="post_body"><%= post.body %></p>
       <!-- <p class="tag_label">Tags :</p> -->
       <ul class="tag_list">

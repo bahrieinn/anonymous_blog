@@ -19,12 +19,14 @@ get '/users/logout' do
 end
 
 
+
 # POST #############################
 
 post '/users/new' do
   @user = User.new(params[:user])
-
+  
   if @user.save
+    session[:user_id] = @user.id
     redirect "/posts"
   else
     redirect "/"

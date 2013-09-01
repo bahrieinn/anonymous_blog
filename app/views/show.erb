@@ -1,4 +1,4 @@
-<% @post = @post.first %>
+
 <div class="single_post">
   <h3 class="post_title"><%= @post.title %></h3>
   <p><%= @post.author %></p>
@@ -14,9 +14,11 @@
   <p class="datetime"><%= @post.fix_datetime %></p>
 </div>
 
-<form action="/posts/<%=@post.id%>/edit">
-  <input class="edit_button" type="submit" value="Edit Post">
-</form>
+<% if current_user.id == @post.user_id %>
+  <form action="/posts/<%=@post.id%>/edit">
+    <input class="edit_button" type="submit" value="Edit Post">
+  </form>
+<% end %>
 
 
 
